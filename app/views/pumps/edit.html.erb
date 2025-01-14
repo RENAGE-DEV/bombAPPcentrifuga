@@ -1,0 +1,108 @@
+<% content_for :title, "Editing pump" %>
+
+<h1>Editar Bomba</h1>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-white py-3">
+      <h5 class="card-title mb-0">
+        <i class="fas fa-edit me-2 text-primary"></i>
+        Editar Bomba
+      </h5>
+    </div>
+
+    <div class="card-body">
+      <%= form_with(model: @pump, local: true) do |form| %>
+        <% if @pump.errors.any? %>
+          <div class="alert alert-danger alert-dismissible fade show">
+            <h6 class="alert-heading mb-1">Se encontraron los siguientes errores:</h6>
+            <ul class="mb-0">
+              <% @pump.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        <% end %>
+
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= form.label :name, "Nombre", class: "form-label text-muted" %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Ingrese el nombre" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :model, "Modelo", class: "form-label text-muted" %>
+              <%= form.text_field :model, class: "form-control", placeholder: "Ingrese el modelo" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :description, "Descripción", class: "form-label text-muted" %>
+              <%= form.text_area :description, class: "form-control", rows: 3, placeholder: "Ingrese la descripción" %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= form.label :length, "Largo (cm)", class: "form-label text-muted" %>
+              <%= form.number_field :length, class: "form-control", placeholder: "Ingrese el largo" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :client_id, "Cliente", class: "form-label text-muted" %>
+              <%= form.collection_select :client_id, Client.all, :id, :name, 
+                  { prompt: "Seleccione un cliente" }, 
+                  { class: "form-select" } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer bg-white py-3 px-0">
+          <div class="d-flex gap-2">
+            <%= form.submit "Actualizar Bomba", class: "btn btn-primary" %>
+            <%= link_to pumps_path, class: "btn btn-light" do %>
+              <i class="fas fa-arrow-left me-2"></i>Volver
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 12px;
+  }
+
+  .card-header {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .card-title {
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+  }
+
+  .btn {
+    padding: 0.5
+</style>

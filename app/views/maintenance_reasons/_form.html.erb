@@ -1,0 +1,22 @@
+<%= form_with(model: maintenance_reason, local: true) do |form| %>
+  <% if maintenance_reason.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(maintenance_reason.errors.count, "error") %> prohibited this maintenance_reason from being saved:</h2>
+      <ul>
+        <% maintenance_reason.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit "Guardar", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", maintenance_reasons_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<%= form_with(model: pump) do |form| %>
+  <% if pump.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(pump.errors.count, "error") %> impidieron guardar esta bomba:</h4>
+      <ul>
+        <% pump.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :name, "Nombre", class: "form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :model, "Modelo de Bomba", class: "form-label" %>
+          <%= form.text_field :model, class: "form-control", placeholder: "Ej: BC-2000" %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :description, "Descripción", class: "form-label" %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :client_id, "Cliente", class: "form-label" %>
+          <%= form.collection_select :client_id, Client.all, :id, :name, 
+              { prompt: "Seleccione un cliente" }, 
+              { class: "form-select" } %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :installation_date, "Fecha de Instalación", class: "form-label" %>
+          <%= form.date_field :installation_date, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <%= form.submit "Guardar", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>

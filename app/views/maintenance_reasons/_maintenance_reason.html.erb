@@ -1,0 +1,51 @@
+<div id="<%= dom_id maintenance_reason %>" class="card mb-4">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="card-title mb-2">
+          <i class="fas fa-tools text-primary me-2"></i>
+          <%= maintenance_reason.name %>
+        </h5>
+      </div>
+      
+      <div class="btn-group">
+        <%= link_to edit_maintenance_reason_path(maintenance_reason), 
+            class: "btn btn-sm btn-outline-primary me-2" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+        
+        <%= button_to maintenance_reason_path(maintenance_reason), 
+            method: :delete,
+            class: "btn btn-sm btn-outline-danger",
+            form: { data: { turbo_confirm: "¿Está seguro de eliminar esta razón de mantenimiento?" } } do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .card-title {
+    color: #1e40af;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .btn-group .btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+  }
+</style>

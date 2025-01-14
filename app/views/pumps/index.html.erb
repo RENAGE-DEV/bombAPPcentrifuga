@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+      <i class="fas fa-pump me-2 text-primary"></i>
+      Bombas
+    </h2>
+    <%= link_to new_pump_path, class: "btn btn-primary" do %>
+      <i class="fas fa-plus me-2"></i>Nueva Bomba
+    <% end %>
+  </div>
+
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Modelo</th>
+            <th>Cliente</th>
+            <th>Largo</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pumps.each do |pump| %>
+            <tr>
+              <td><%= pump.name %></td>
+              <td><%= pump.model %></td>
+              <td><%= pump.client.name %></td>
+              <td><%= pump.length %> cm</td>
+              <td class="text-end">
+                <%= link_to pump, class: "btn btn-sm btn-info text-white" do %>
+                  <i class="fas fa-eye"></i>
+                <% end %>
+                <%= link_to edit_pump_path(pump), class: "btn btn-sm btn-primary" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= button_to pump_path(pump), method: :delete, class: "btn btn-sm btn-danger", 
+                    form: { style: 'display: inline-block;', 
+                           data: { turbo_confirm: '¿Estás seguro de eliminar esta bomba?' } } do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

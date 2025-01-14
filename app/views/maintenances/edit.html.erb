@@ -1,0 +1,12 @@
+<% content_for :title, "Editing maintenance" %>
+
+<h1>Editar Mantenimiento</h1>
+
+<%= render "form", maintenance: @maintenance %>
+
+<br>
+
+<div>
+  <%= link_to "Ver Mantenimiento", @maintenance %> |
+  <%= link_to "Volver a Mantenimientos", maintenances_path %>
+</div>

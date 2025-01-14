@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Nuevo Mantenimiento para Bomba <%= @pump.name %></h2>
+
+  <%= form_with(model: [@pump, @maintenance], local: true) do |f| %>
+    <div class="form-group mb-3">
+      <%= f.label :maintenance_reason_id, "Motivo del mantenimiento" %>
+      <%= f.collection_select :maintenance_reason_id, 
+                            MaintenanceReason.all, 
+                            :id, 
+                            :name, 
+                            { prompt: "Seleccione un motivo" }, 
+                            class: "form-select" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :maintenance_date, "Fecha del mantenimiento" %>
+      <%= f.date_field :maintenance_date, class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :description, "Descripción" %>
+      <%= f.text_area :description, class: "form-control", rows: 3 %>
+    </div>
+
+    <%= f.submit "Guardar Mantenimiento", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", pump_path(@pump), class: "btn btn-secondary" %>
+  <% end %>
+</div>

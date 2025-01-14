@@ -1,0 +1,77 @@
+<div class="container">
+  <h2>Detalles de la Bomba <%= @pump.name %></h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title mb-4">
+        <i class="fas fa-pump me-2 text-primary"></i>
+        Información de la Bomba
+      </h5>
+      <div class="info-group">
+        <p><strong>Nombre:</strong> <%= @pump.name %></p>
+        <p><strong>Modelo:</strong> <%= @pump.model %></p>
+        <p><strong>Cliente:</strong> <%= @pump.client.name %></p>
+        <p class="mb-0"><strong>Largo:</strong> <%= @pump.length %> cm</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5>Historial de Mantenimientos</h5>
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pump.maintenances.order(maintenance_date: :desc).each do |maintenance| %>
+            <tr>
+              <td><%= maintenance.maintenance_date&.strftime("%d/%m/%Y") %></td>
+              <td><%= maintenance.maintenance_reason.name %></td>
+              <td><%= maintenance.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= link_to new_pump_maintenance_path(@pump), class: "btn btn-primary" do %>
+        <i class="fas fa-plus"></i> Nuevo Mantenimiento
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= link_to "Volver", pumps_path, class: "btn btn-secondary" %>
+  </div>
+</div>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .card-title {
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+
+  .info-group p {
+    font-size: 1rem;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-group strong {
+    color: #64748b;
+    font-weight: 500;
+    min-width: 100px;
+    display: inline-block;
+  }
+</style>
