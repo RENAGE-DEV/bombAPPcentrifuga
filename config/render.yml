@@ -1,0 +1,28 @@
+# Exported from Render on 2025-01-15T12:58:27Z
+services:
+- type: web
+  name: BombAPP
+  runtime: docker
+  repo: https://github.com/RENAGE-DEV/bombAPPcentrifuga
+  plan: free
+  envVars:
+  - key: DATABASE_USER
+    sync: false
+  - key: DATABASE_URL
+    sync: false
+  - key: DATABASE_PORT
+    sync: false
+  - key: DATABASE_PASSWORD
+    sync: false
+  - key: RAILS_MASTER_KEY
+    sync: false
+  - key: DATABASE_HOST
+    sync: false
+  - key: DATABASE_NAME
+    sync: false
+  - key: WEB_CONCURRENCY
+    sync: false
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+version: "1"
